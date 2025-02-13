@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // ป้องกันการส่งฟอร์มโดยอัตโนมัติ
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // ตรวจสอบชื่อผู้ใช้และรหัสผ่าน
+            if (username === 'Cyber' && password === 'Tiw22122543') {
+                // ถ้าถูกต้อง ให้ส่งฟอร์มไปยัง cyber.html
+                window.location.href = 'cyber.html';
+            } else {
+                // ถ้าผิด ให้แสดงข้อความเตือน
+                alert('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+            }
+        }
+    </script>
+</head>
+<body>
+    <video autoplay muted loop id="background-video">
+        <source src="12.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="container">
+        <h1>Login</h1>
+        <form onsubmit="validateForm(event)"> <!-- เรียกใช้ฟังก์ชัน validateForm เมื่อส่งฟอร์ม -->
+            <input type="text" id="username" placeholder="User  " required> <!-- ไม่มีค่า default ให้ผู้ใช้พิมพ์เอง -->
+            <input type="password" id="password" placeholder="Password" required> <!-- ไม่มีค่า default ให้ผู้ใช้พิมพ์เอง -->
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>

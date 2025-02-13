@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Data Entry</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // ฟังก์ชันสำหรับเพิ่มข้อมูล
+        function addData(event) {
+            event.preventDefault(); // ป้องกันการส่งฟอร์มโดยอัตโนมัติ
+            const username = document.getElementById('username').value; // รับค่าจากฟิลด์ username
+            const password = document.getElementById('password').value; // รับค่าจากฟิลด์ password
+
+            if (username && password) {
+                // รับข้อมูลที่มีอยู่ใน Local Storage
+                let dataList = JSON.parse(localStorage.getItem('dataList')) || [];
+                dataList.push({ user: username, pass: password }); // เพิ่มข้อมูลใหม่เข้าไปใน array
+                localStorage.setItem('dataList', JSON.stringify(dataList)); // เก็บข้อมูลกลับไปใน Local Storage
+
+                displayData(); // เรียกใช้ฟังก์ชันเพื่อแสดงข้อมูล
+                document.getElementById('username').value = ''; // ล้างฟิลด์ username
+                document.getElementById('password').value = ''; // ล้างฟิลด์ password
+            } else {
+                alert('กรุณากรอกข้อมูล'); // แสดงข้อความเตือนถ้าฟิลด์ว่าง
+            }
+        }
+
+        function displayData() {
+            const dataList = JSON.parse(localStorage.getItem('dataList')) || [];
+            const tableBody = document.getElementById('dataList'); // รับ tbody ของตาราง
+            tableBody.innerHTML = ''; // ล้างรายการก่อนแสดงใหม่
+
+            dataList.forEach(data => {
+                const row = document.createElement('tr'); // สร้างแถวใหม่
+                const userCell = document.createElement('td'); // สร้างเซลล์สำหรับ User
+                const passCell = document.createElement('td'); // สร้างเซลล์สำหรับ Password
+
+                userCell.textContent = data.user; // ตั้งค่าข้อความของเซลล์ User
+                passCell.textContent = data.pass; // ตั้งค่าข้อความของเซลล์ Password
+
+                row.appendChild(userCell); // เพิ่มเซลล์ User ลงในแถว
+                row.appendChild(passCell); // เพิ่มเซลล์ Password ลงในแถว
+                tableBody.appendChild(row); // เพิ่มแถวลงใน tbody
+            });
+        }
+
+        // เรียกใช้ displayData เมื่อโหลดหน้า
+        window.onload = displayData;
+    </script>
+    <style>
+        /* CSS สำหรับตาราง */
+        table {
+            width: 100%; /* ทำให้ตารางกว้างเต็ม */
+            border-collapse: collapse; /* รวมเส้นขอบ */
+        }
+        th, td {
+            border: 1px solid #00ffcc; /* เส้นขอบของเซลล์ */
+            padding: 10px; /* ระยะห่างภายในเซลล์ */
+            text-align: left; /* จัดข้อความไปทางซ้าย */
+        }
+        th {
+            background-color: #1a1a1a; /* พื้นหลังของหัวตาราง */
+            color: #00ffcc; /* สีตัวอักษรของหัวตาราง */
+        }
+        tr:nth-child(even) {
+            background-color: #2a2a2a; /* พื้นหลังของแถวที่เป็นเลขคู่ */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>เพิ่มข้อมูล</h1>
+        <form onsubmit="addData(event)"> <!-- เรียกใช้ฟังก์ชัน addData เมื่อส่งฟอร์ม -->
+            <input type="text" id="username" placeholder="User  " required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="submit" value="เพิ่มข้อมูล">
+        </form>
+        <h2>ข้อมูลที่เพิ่มเข้าไป</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Password</th>
+                </tr>
+            </thead>
+            <tbody id="dataList"> <!-- รายการข้อมูลที่เพิ่มเข้าไปจะถูกแสดงที่นี่ -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

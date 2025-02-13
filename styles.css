@@ -1,0 +1,93 @@
+* {
+    box-sizing: border-box; /* ทำให้การคำนวณความกว้างรวมถึง padding และ border */
+}
+
+body {
+    margin: 0;
+    overflow: hidden; /* ปิดการเลื่อน */
+    display: flex; /* ใช้ Flexbox */
+    justify-content: flex-end; /* จัดตำแหน่งไปทางขวา */
+    align-items: stretch; /* ให้กล่องยืดเต็มความสูง */
+    height: 100vh; /* ความสูงเต็มหน้าจอ */
+    font-family: 'Monaco', 'Courier New', monospace; /* เปลี่ยนฟอนต์เป็น Monaco */
+}
+
+#background-video {
+    position: fixed; /* ทำให้วีดีโออยู่ที่ตำแหน่งคงที่ */
+    top: 0;
+    left: 0;
+    width: 100%; /* ทำให้วีดีโอเต็มความกว้าง */
+    height: 100%; /* ทำให้วีดีโอเต็มความสูง */
+    object-fit: cover; /* ทำให้วีดีโอปรับขนาดให้เต็มพื้นที่ */
+    z-index: -1; /* วีดีโออยู่ด้านหลัง */
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.7); /* พื้นหลังกล่อง */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+    text-align: center;
+    width: 350px; /* ความกว้างของกล่อง */
+    height: 100vh; /* ทำให้กล่องยาวเต็มความสูง */
+    position: fixed; /* ใช้ตำแหน่งแบบ fixed */
+    top: 0; /* ชิดด้านบน */
+    right: 0; /* ชิดด้านขวา */
+    display: flex; /* ใช้ Flexbox */
+    flex-direction: column; /* จัดเรียงในแนวตั้ง */
+    justify-content: center; /* จัดตำแหน่งกลางในแนวตั้ง */
+    align-items: center; /* จัดตำแหน่งกลางในแนวนอน */
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    text-shadow: 0 0 10px #00ffcc; /* เงาสีเขียว */
+    color: white; /* เปลี่ยนสีข้อความเป็นสีขาวเพื่อให้มองเห็นได้ชัดเจน */
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: calc(100% - 20px); /* ลดความกว้างเพื่อให้มี padding */
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #1a1a1a; /* พื้นหลังกล่องกรอกข้อมูล */
+    color: #00ffcc; /* สีตัวอักษร */
+    font-size: 1em;
+    font-family: 'Monaco', 'Courier New', monospace; /* ใช้ฟอนต์ในกล่องกรอกข้อมูล */
+    box-shadow: inset 0 0 5px rgba(0, 255, 204, 0.5);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+    background-color: #2a2a2a;
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
+}
+
+input[type="submit"], .register-button {
+    background-color: #00ffcc;
+    color: #0e0e0e;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-family: 'Monaco', 'Courier New', monospace; /* ใช้ฟอนต์ในปุ่ม */
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 10px;
+    width: 100%; /* ทำให้ปุ่มกว้างเต็ม */
+    text-align: center; /* จัดตำแหน่งข้อความให้ตรงกลาง */
+}
+
+input[type="submit"]:hover, .register-button:hover {
+    background-color: #aaaaaa;
+    transform: translateY(-2px);
+}
+
+.register-button {
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #000000; /* เปลี่ยนสีข้อความให้มองเห็นได้ชัดเจน */
+}
